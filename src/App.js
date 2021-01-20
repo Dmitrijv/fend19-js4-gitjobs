@@ -9,11 +9,9 @@ import JobDetailsPage from "./pages/JobDetailsPage";
 
 function App() {
   const [jobList, setJobList] = useState(null);
-  const [resultList, setResultList] = useState(null);
 
   function getJobList() {
-    const url = "https://us-central1-wands-2017.cloudfunctions.net/githubjobs?description=javascript/";
-    // const url = "https://swapi.dev/api/people/";
+    const url = "https://us-central1-wands-2017.cloudfunctions.net/githubjobs?description=javascript";
     fetch(url)
       .then((res) => res.json())
       .then((data) => setJobList(data));
@@ -25,7 +23,7 @@ function App() {
 
   return (
     <div>
-      <JobContext.Provider value={{ jobList, resultList, setResultList, getJobList }}>
+      <JobContext.Provider value={{ jobList, getJobList }}>
         <Switch>
           <Route path="/job-description/:jobId" render={(props) => <JobDetailsPage {...props} />} />
           <Route path="/jobs" exact component={StartPage} />
