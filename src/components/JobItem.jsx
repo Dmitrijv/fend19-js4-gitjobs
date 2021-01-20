@@ -1,5 +1,5 @@
 import React from "react";
 
-export default function JobItem({ jobItem }) {
-  return <div>jobItem.title</div>;
+export default function JobItem({ item }) {
+  return <li>{item.title}</li>;
 }
