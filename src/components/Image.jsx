@@ -1,9 +1,9 @@
 import React from "react";
 
-export default function Image({ imgUrl, companyUrl }) {
+export default function Image({ imgUrl }) {
   return (
-    <a href={companyUrl}>
+    <div className="image-container">
       <img className="company-logo" src={imgUrl} alt="company url" />
-    </a>
+    </div>
   );
 }

@@ -6,12 +6,13 @@ import Image from "./../components/Image";
 import { JobContext } from "./../contexts/JobContext";
 
 export default function JobDetailsPage() {
-  const { jobList } = useContext(JobContext);
-  const [jobItem, setJobItem] = useState(null);
+  const { resultList } = useContext(JobContext);
   const { jobId } = useParams();
 
+  const [jobItem, setJobItem] = useState(null);
+
   useEffect(() => {
-    const item = jobList.find((job) => job.id === jobId);
+    const item = resultList.find((job) => job.id === jobId);
     setJobItem(item);
   }, []);
 
@@ -23,10 +24,12 @@ export default function JobDetailsPage() {
     <div className="job-container">
       {jobItem && (
         <div>
-          <h2>
-            {jobItem.title} - <strong>{jobItem.type}</strong>
-          </h2>
-          <Image imgUrl={jobItem.company_logo} companyUrl={jobItem.url} />
+          <h2>{jobItem.title}</h2>
+          <p>
+            <strong>{jobItem.type}</strong>
+          </p>
+          <Image imgUrl={jobItem.company_logo} />
+          <a href={jobItem.url}>company url</a>
           <div dangerouslySetInnerHTML={createMarkup()} />
         </div>
       )}

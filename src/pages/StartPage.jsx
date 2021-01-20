@@ -4,17 +4,15 @@ import JobList from "./../components/JobList";
 import { JobContext } from "./../contexts/JobContext";
 
 export default function StartPage() {
-  const { jobList } = useContext(JobContext);
+  const { resultList, setResultList, searchInProgress, getJobsByDescription } = useContext(JobContext);
 
   const [searchKeyword, setSearchKeyword] = useState("");
-  const [resultList, setResultList] = useState(null);
 
-  function handleJobSearch(event) {
+  async function handleJobSearch(event) {
     event.preventDefault();
+    if (searchKeyword.length === 0) return;
     const keyword = searchKeyword.replace(" ", "+");
-    console.log(`searching for ${keyword}`);
-    const filteredList = jobList.filter((item) => item.description.includes(keyword));
-    setResultList(filteredList);
+    await getJobsByDescription(keyword);
   }
 
   function handleKeywordUpdate(newKeyword) {
@@ -26,11 +24,20 @@ export default function StartPage() {
 
   return (
     <div className="App">
-      <h1>Github Jobs</h1>
+      <h1>GitHub Jobs</h1>
       <form className="job-form" onSubmit={handleJobSearch}>
-        <input type="text" onChange={(e) => handleKeywordUpdate(e.target.value)} placeholder="search by description" />
-        {jobList && <button type="submit">Search</button>}
-        {!jobList && <button disabled>Search</button>}
+        <input
+          type="text"
+          minLength="1"
+          onChange={(e) => handleKeywordUpdate(e.target.value)}
+          placeholder="search by description"
+        />
+        {searchInProgress && (
+          <button disabled type="submit">
+            Search
+          </button>
+        )}
+        {!searchInProgress && <button type="submit">Search</button>}
       </form>
       <JobList jobList={resultList} />
     </div>

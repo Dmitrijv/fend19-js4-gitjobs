@@ -43,12 +43,12 @@ body {
 }
 
 form.job-form button {
-  padding: 3px 4px;
+  padding: 7px 8px;
 }
 
 form.job-form input {
-  min-width: 200px;
+  min-width: 250px;
   border: 1px solid #ccc;
-  padding: 4px 6px;
+  padding: 8px 12px;
   margin-right: 10px;
 }
