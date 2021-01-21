@@ -13,7 +13,8 @@ export default function JobDetailsPage() {
 
   useEffect(() => {
     if (resultList) {
-      setJobItem(resultList.find((job) => job.id === jobId));
+      const jobItem = resultList.find((job) => job.id === jobId);
+      if (jobItem) setJobItem(jobItem);
     } else {
       const url = `https://jobs.github.com/positions/${jobId}.json`;
       fetch(url)
