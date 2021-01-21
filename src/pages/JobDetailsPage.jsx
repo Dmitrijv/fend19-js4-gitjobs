@@ -16,7 +16,7 @@ export default function JobDetailsPage() {
       const jobItem = resultList.find((job) => job.id === jobId);
       if (jobItem) setJobItem(jobItem);
     } else {
-      const url = `https://jobs.github.com/positions/${jobId}.json`;
+      const url = `https://us-central1-wands-2017.cloudfunctions.net/githubjobs?id=${jobId}`;
       fetch(url)
         .then((res) => res.json())
         .then((data) => {
