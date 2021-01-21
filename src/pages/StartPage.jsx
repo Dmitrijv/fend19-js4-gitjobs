@@ -28,6 +28,7 @@ export default function StartPage() {
       <form className="job-form" onSubmit={handleJobSearch}>
         <input
           type="text"
+          name="job-description"
           minLength="1"
           onChange={(e) => handleKeywordUpdate(e.target.value)}
           placeholder="search by description"

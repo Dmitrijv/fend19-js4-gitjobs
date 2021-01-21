@@ -1,8 +1,22 @@
-import { render, screen } from '@testing-library/react';
-import App from './App';
+import React from "react";
+import { BrowserRouter } from "react-router-dom";
+import { mount } from "enzyme";
+import App from "./App";
 
-test('renders learn react link', () => {
-  render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+import JobContextProvider from "./contexts/JobContext";
+
+describe("Test start page structure", () => {
+  const wrapper = mount(
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+  );
+
+  it("start page has a 'Search' button", () => {
+    expect(wrapper.find("button").text()).toContain("Search");
+  });
+
+  it("start page has a job description field", () => {
+    expect(wrapper.find("input").props().name).toBe("job-description");
+  });
 });
