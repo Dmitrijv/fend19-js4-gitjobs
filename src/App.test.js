@@ -3,14 +3,16 @@ import { BrowserRouter } from "react-router-dom";
 import { mount } from "enzyme";
 import App from "./App";
 
-import JobContextProvider from "./contexts/JobContext";
-
 describe("Test start page structure", () => {
-  const wrapper = mount(
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
-  );
+  let wrapper;
+
+  beforeEach(() => {
+    wrapper = mount(
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    );
+  });
 
   it("start page has a 'Search' button", () => {
     expect(wrapper.find("button").text()).toContain("Search");

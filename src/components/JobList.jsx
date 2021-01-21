@@ -8,7 +8,7 @@ export default function JobList({ jobList }) {
   return (
     <ol>
       {jobList.map(function (item, index) {
-        return <JobItem key={`jobitem-row-${index}`} item={item} />;
+        return <JobItem key={item.id} item={item} />;
       })}
     </ol>
   );
