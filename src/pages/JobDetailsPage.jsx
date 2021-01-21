@@ -12,8 +12,16 @@ export default function JobDetailsPage() {
   const [jobItem, setJobItem] = useState(null);
 
   useEffect(() => {
-    const item = resultList.find((job) => job.id === jobId);
-    setJobItem(item);
+    if (resultList) {
+      setJobItem(resultList.find((job) => job.id === jobId));
+    } else {
+      const url = `https://jobs.github.com/positions/${jobId}.json`;
+      fetch(url)
+        .then((res) => res.json())
+        .then((data) => {
+          setJobItem(data);
+        });
+    }
   }, []);
 
   function createDescriptionMarkup() {
