@@ -28,7 +28,9 @@ body {
 }
 
 .job-container img.company-logo {
+  max-width: 800px;
   max-height: 200px;
+  background-color: white;
 }
 
 .job-container a {

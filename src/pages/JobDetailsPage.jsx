@@ -16,7 +16,7 @@ export default function JobDetailsPage() {
     setJobItem(item);
   }, []);
 
-  function createMarkup() {
+  function createDescriptionMarkup() {
     return { __html: jobItem.description };
   }
 
@@ -30,7 +30,7 @@ export default function JobDetailsPage() {
           </p>
           <Image imgUrl={jobItem.company_logo} />
           <a href={jobItem.url}>company url</a>
-          <div dangerouslySetInnerHTML={createMarkup()} />
+          <div dangerouslySetInnerHTML={createDescriptionMarkup()} />
         </div>
       )}
 

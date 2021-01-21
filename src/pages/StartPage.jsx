@@ -39,6 +39,7 @@ export default function StartPage() {
         )}
         {!searchInProgress && <button type="submit">Search</button>}
       </form>
+      {searchInProgress === true && <p>searching...</p>}
       <JobList jobList={resultList} />
     </div>
   );

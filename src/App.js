@@ -18,6 +18,7 @@ function App() {
       setResultList(searchCache[keyword]);
     } else {
       console.log(`making network request for "${keyword}"`);
+      setResultList(null);
       setSearchInProgress(true);
       const url = `https://us-central1-wands-2017.cloudfunctions.net/githubjobs?description=${keyword}`;
       fetch(url)
