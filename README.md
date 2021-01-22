@@ -1,70 +1,64 @@
-# Getting Started with Create React App
+# FEND19 - JavaScript 4 - GitHub Job Listing
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+![preview](readme/ex.png)
 
-## Available Scripts
+In this task I created a React app that lets the user search for jobs using the description. The project is hosted on Firebase and can be visited at this link: [https://dmitrijv-att1.web.app/](https://dmitrijv-att1.web.app/)
 
-In the project directory, you can run:
+If a user searches for "react javascript", the string is changed to "react+javascript" since the GitHub API expects spaces to be replaced with plus signs.
 
-### `yarn start`
+```js
+async function handleJobSearch(event) {
+  event.preventDefault();
+  if (searchKeyword.length === 0) return;
+  const keyword = searchKeyword.replace(" ", "+");
+  await getJobsByDescription(keyword);
+}
+```
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Search results from the API are saved in context and any future search will check if the value the user is searching for is already in context, if so, it is returned from context instead of a new network request. After a network request has been initated the search button becomes disabled to prevent spamming search against a slow API.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+```js
+async function getJobsByDescription(keyword) {
+  if (searchCache[keyword]) {
+    console.log(`getting cached results for "${keyword}"`);
+    setResultList(searchCache[keyword]);
+  } else {
+    console.log(`making network request for "${keyword}"`);
+    setResultList(null);
+    setSearchInProgress(true);
+    const url = `https://us-central1-wands-2017.cloudfunctions.net/githubjobs?description=${keyword}`;
+    fetch(url)
+      .then((res) => res.json())
+      .then((data) => {
+        setResultList(data);
+        searchCache[keyword] = data;
+        setSearchCache(searchCache);
+        setSearchInProgress(false);
+      });
+  }
+}
+```
 
-### `yarn test`
+Clicking a job item on the result list will take you to a job details page. A job item is formatted as follows:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```js
+<div className="job-container">
+  {jobItem && (
+    <div>
+      <h2>{jobItem.title}</h2>
+      <p>
+        <strong>{jobItem.type}</strong>
+      </p>
+      <Image imgUrl={jobItem.company_logo} />
+      <a href={jobItem.url}>company url</a>
+      <div dangerouslySetInnerHTML={createDescriptionMarkup()} />
+    </div>
+  )}
+  <Link className="App-link" to={"/search"}>
+    <p>Back to search</p>
+  </Link>
+</div>
+```
 
-### `yarn build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+There are several tests to make sure that all the components in the project are
+working as expected. See the [**test**](https://github.com/Dmitrijv/fend19-js4-gitjobs/tree/master/src/components/__test__) folder.
