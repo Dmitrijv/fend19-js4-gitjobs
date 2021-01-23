@@ -65,7 +65,10 @@ Clicking a job item on the result list will take you to a job details page. A jo
 # Tests
 
 There is a total of 10 tests to make sure that all the components in the project are
-working as expected:
+working as expected. General app test are located in[App.test.js](https://github.com/Dmitrijv/fend19-js4-gitjobs/tree/master/App.test.js) folder.
+Tests for specific components are located in the [**test**](https://github.com/Dmitrijv/fend19-js4-gitjobs/tree/master/src/components/__test__) folder.
+
+You can run these tests by running the following commands:
 
 ```
 npm test App.test.js
@@ -73,6 +76,3 @@ npm test src/components/__test__/JobList.test.js
 npm test src/components/__test__/JobItem.test.js
 npm test src/components/__test__/Image.test.js
 ```
-
-General app test are located in[App.test.js](https://github.com/Dmitrijv/fend19-js4-gitjobs/tree/master/App.test.js) folder.
-Tests for specific components are located in the [**test**](https://github.com/Dmitrijv/fend19-js4-gitjobs/tree/master/src/components/__test__) folder.
