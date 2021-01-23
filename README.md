@@ -65,7 +65,7 @@ async function handleJobSearch(event) {
 ## Tests
 
 There is a total of 10 tests to make sure that all of the components in the project are
-working as expected. General app test are located in [App.test.js](https://github.com/Dmitrijv/fend19-js4-gitjobs/tree/master/App.test.js) folder.
+working as expected. General app test are located in [App.test.js](https://github.com/Dmitrijv/fend19-js4-gitjobs/tree/master/App.test.js) file.
 Tests for specific components are located in the [**test**](https://github.com/Dmitrijv/fend19-js4-gitjobs/tree/master/src/components/__test__) folder.
 
 You can run these tests by running the following commands:
