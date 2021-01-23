@@ -2,6 +2,8 @@
 
 ![preview](readme/ex.png)
 
+# Description
+
 In this task I created a React app that lets the user search for jobs using the description. The project is hosted on Firebase and can be visited at this link: [https://dmitrijv-att1.web.app/](https://dmitrijv-att1.web.app/)
 
 If a user searches for "react javascript", the string is changed to "react+javascript" since the GitHub API expects spaces to be replaced with plus signs.
@@ -60,5 +62,17 @@ Clicking a job item on the result list will take you to a job details page. A jo
 </div>
 ```
 
-There are several tests to make sure that all the components in the project are
-working as expected. See the [**test**](https://github.com/Dmitrijv/fend19-js4-gitjobs/tree/master/src/components/__test__) folder.
+# Tests
+
+There is a total of 10 tests to make sure that all the components in the project are
+working as expected:
+
+```
+npm test App.test.js
+npm test src/components/__test__/JobList.test.js
+npm test src/components/__test__/JobItem.test.js
+npm test src/components/__test__/Image.test.js
+```
+
+General app test are located in[App.test.js](https://github.com/Dmitrijv/fend19-js4-gitjobs/tree/master/App.test.js) folder.
+Tests for specific components are located in the [**test**](https://github.com/Dmitrijv/fend19-js4-gitjobs/tree/master/src/components/__test__) folder.
