@@ -6,17 +6,6 @@
 
 In this task I created a React app that lets the user search for jobs using the description. The project is hosted on Firebase and can be visited at this link: [https://dmitrijv-att1.web.app/](https://dmitrijv-att1.web.app/)
 
-If a user searches for "react javascript", the string is changed to "react+javascript" since the GitHub API expects spaces to be replaced with plus signs.
-
-```js
-async function handleJobSearch(event) {
-  event.preventDefault();
-  if (searchKeyword.length === 0) return;
-  const keyword = searchKeyword.replace(" ", "+");
-  await getJobsByDescription(keyword);
-}
-```
-
 Search results from the API are saved in context and any future search will check if the value the user is searching for is already in context, if so, it is returned from context instead of a new network request. After a network request has been initated the search button becomes disabled to prevent spamming search against a slow API.
 
 ```js
@@ -60,6 +49,17 @@ Clicking a job item on the result list will take you to a job details page. A jo
     <p>Back to search</p>
   </Link>
 </div>
+```
+
+If a user searches for "react javascript", the string is changed to "react+javascript" since the GitHub API expects spaces to be replaced with plus signs.
+
+```js
+async function handleJobSearch(event) {
+  event.preventDefault();
+  if (searchKeyword.length === 0) return;
+  const keyword = searchKeyword.replace(" ", "+");
+  await getJobsByDescription(keyword);
+}
 ```
 
 ## Tests
