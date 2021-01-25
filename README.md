@@ -4,7 +4,7 @@
 
 ## Description
 
-In this task I created a React app that lets the user search for jobs using the description. The project is hosted on Firebase and can be visited at this link: [https://dmitrijv-att1.web.app/](https://dmitrijv-att1.web.app/)
+In this task I created a React app that lets the user search for jobs by description. The project is hosted on Firebase and can be visited at this link: [https://dmitrijv-att1.web.app/](https://dmitrijv-att1.web.app/)
 
 Search results from the API are saved in context and any future search will check if the value the user is searching for is already in context, if so, it is returned from context instead of a new network request. After a network request has been initated the search button becomes disabled to prevent spamming search against a slow API.
 
